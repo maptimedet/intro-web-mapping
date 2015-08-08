@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <title>Maptime Detroit</title>
+
+    <style>
+        #map {
+            height: 750px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="map"></div>
+
+    <script>
+
+        var map = L.map('map').setView([42.331, -83.045], 13);
+
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox.streets',
+            accessToken: 'pk.eyJ1Ijoiam1jYnJvb20iLCJhIjoianRuR3B1NCJ9.cePohSx5Od4SJhMVjFuCQA'
+        }).addTo(map);
+
+        var parkStyle = {
+            "color": "#304D1C",
+            "weight": 1.5,
+            "opacity": 0.75
+        };
+
+        function onEachPark(feature, layer){
+            layer.bindPopup(feature.properties.NAME);
+        }
+
+        $.getJSON("../data/parks.geojson", function(data) {
+          var parks = L.geoJson(data, {
+              style: parkStyle,
+              onEachFeature: onEachPark
+          });
+          parks.addTo(map);
+        });
+
+    </script>
+
+</body>
+
+</html>
