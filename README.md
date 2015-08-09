@@ -86,7 +86,7 @@ Windows:
 ```
 
 ## Add a base map: loading a TileLayer
-- Add this code to your main `<script>`:
+- Add this code to your main `<script>` in the **body** of your webpage:
 
 ```html
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -107,7 +107,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 ```
 
-- Get the GeoJSON data and display it on the map:
+- Get the GeoJSON data and display it on the map. Add this code to your main `<script>`, after loading a TileLayer:
 
 ```html
 $.getJSON("../data/parks.geojson", function(data) {
@@ -117,7 +117,7 @@ $.getJSON("../data/parks.geojson", function(data) {
 ```
 
 ## Style the GeoJSON
-- Create an object with some styling options:
+- Create an object with some styling options. This will need to be before obtaining and displaying GeoJSON data:
 
 ```html
 var parkStyle = {
